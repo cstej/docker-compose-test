@@ -13,14 +13,6 @@ services:
       - 3000
     networks:
       - dokploy-network
-    labels:
-      - traefik.enable=true
-      - traefik.http.routers.next-app.rule=Host(`docker.cstej.in`) && PathPrefix(`/`)
-      - traefik.http.routers.next-app.service=next-app-service
-      - traefik.http.routers.next-app.middlewares=redirect-to-https
-      - traefik.http.routers.next-app.entrypoints=web,websecure
-      - traefik.http.routers.next-app.tls.certresolver=letsencrypt
-      - traefik.http.services.next-app-service.loadbalancer.server.port=3000
 
   # Add more containers below (nginx, postgres, etc.)
 
