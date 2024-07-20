@@ -15,10 +15,13 @@ services:
       - dokploy-network
     labels:
       - traefik.enable=true
-      - traefik.http.routers.next-app.rule=Host(`docker.cstej.in`)
-      - traefik.http.routers.next-app.entrypoints=websecure
-      - traefik.http.routers.next-app.tls.certResolver=letsencrypt
-      - traefik.http.services.next-app.loadbalancer.server.port=3000
+      - traefik.http.routers.next-app.rule=Host(`docker.cstej.in`) && PathPrefix(`/`)
+      - traefik.http.routers.next-app.service=next-app-service
+      - traefik.http.routers.next-app.middlewares=redirect-to-https
+      - traefik.http.routers.next-app.entrypoints=web,websecure
+      - traefik.http.routers.next-app.tls.certresolver=letsencrypt
+      - traefik.http.services.next-app-service.loadbalancer.server.port=3000
+
   # Add more containers below (nginx, postgres, etc.)
 
 # Define a network, which allows containers to communicate
