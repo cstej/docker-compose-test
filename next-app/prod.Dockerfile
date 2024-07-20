@@ -47,6 +47,9 @@ FROM base AS runner
 
 WORKDIR /app
 
+# Install bash
+RUN apk add --no-cache bash
+
 # Don't run production as root
 RUN addgroup --system --gid 1001 nodejs
 RUN adduser --system --uid 1001 nextjs
